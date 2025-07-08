@@ -3,16 +3,19 @@
 
 #include <QDialog>
 #include <QCamera>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QTimer>
 #include <QCameraViewfinder>
+#include <QTimer>
+
+namespace Ui {
+class LoginWindow;
+}
 
 class LoginWindow : public QDialog
 {
     Q_OBJECT
 public:
     explicit LoginWindow(QWidget *parent = nullptr);
+    ~LoginWindow();
 
 signals:
 
@@ -22,10 +25,8 @@ private slots:
     void recognitionFinished(bool success);
 
 private:
+    Ui::LoginWindow *ui;
     QCamera *camera;
-    QCameraViewfinder *viewFinder;
-    QPushButton *openButton;
-    QPushButton *startButton;
 };
 
 #endif // LOGINWINDOW_H

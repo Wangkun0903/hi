@@ -1,28 +1,26 @@
 #include "addgroupdialog.h"
+#include "ui_addgroupdialog.h"
 
 AddGroupDialog::AddGroupDialog(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent), ui(new Ui::AddGroupDialog)
 {
-    setWindowTitle(tr("Add Group"));
-    groupIdEdit = new QLineEdit(this);
-    groupIdEdit->setPlaceholderText(tr("Group ID"));
-    okButton = new QPushButton(tr("OK"), this);
+    ui->setupUi(this);
+    connect(ui->okButton, &QPushButton::clicked, this, &AddGroupDialog::acceptGroup);
+}
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(groupIdEdit);
-    layout->addWidget(okButton);
-
-    connect(okButton, &QPushButton::clicked, this, &AddGroupDialog::acceptGroup);
+AddGroupDialog::~AddGroupDialog()
+{
+    delete ui;
 }
 
 QString AddGroupDialog::groupId() const
 {
-    return groupIdEdit->text();
+    return ui->groupIdEdit->text();
 }
 
 void AddGroupDialog::acceptGroup()
 {
-    if (groupIdEdit->text().isEmpty())
+    if (ui->groupIdEdit->text().isEmpty())
         return;
     accept();
 }

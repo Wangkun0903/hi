@@ -1,32 +1,35 @@
 #include "loginwindow.h"
+#include "ui_loginwindow.h"
 #include "mainwindow.h"
 #include <QMessageBox>
+#include <QPushButton>
 
 LoginWindow::LoginWindow(QWidget *parent)
-    : QDialog(parent), camera(nullptr)
+    : QDialog(parent), ui(new Ui::LoginWindow), camera(nullptr)
 {
-    setWindowTitle(tr("Login"));
-    viewFinder = new QCameraViewfinder(this);
+    ui->setupUi(this);
+    ui->startButton->setEnabled(false);
 
-    openButton = new QPushButton(tr("Open Camera"), this);
-    startButton = new QPushButton(tr("Start Recognition"), this);
-    startButton->setEnabled(false);
+    connect(ui->openButton, &QPushButton::clicked, this, &LoginWindow::openCamera);
+    connect(ui->startButton, &QPushButton::clicked, this, &LoginWindow::startRecognition);
+}
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(viewFinder);
-    layout->addWidget(openButton);
-    layout->addWidget(startButton);
-
-    connect(openButton, &QPushButton::clicked, this, &LoginWindow::openCamera);
-    connect(startButton, &QPushButton::clicked, this, &LoginWindow::startRecognition);
+LoginWindow::~LoginWindow()
+{
+    if (camera)
+        camera->stop();
+    delete camera;
+    delete ui;
 }
 
 void LoginWindow::openCamera()
 {
-    camera = new QCamera(this);
-    camera->setViewfinder(viewFinder);
+    if (!camera) {
+        camera = new QCamera(this);
+        camera->setViewfinder(ui->viewFinder);
+    }
     camera->start();
-    startButton->setEnabled(true);
+    ui->startButton->setEnabled(true);
 }
 
 void LoginWindow::startRecognition()

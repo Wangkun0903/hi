@@ -1,47 +1,34 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "addgroupdialog.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), camera(nullptr)
+    : QMainWindow(parent), ui(new Ui::MainWindow), camera(nullptr)
 {
-    setWindowTitle(tr("Main"));
-    QWidget *central = new QWidget(this);
-    setCentralWidget(central);
+    ui->setupUi(this);
 
-    viewFinder = new QCameraViewfinder(this);
-    userIdEdit = new QLineEdit(this);
-    userIdEdit->setPlaceholderText(tr("User ID"));
-    groupIdEdit = new QLineEdit(this);
-    groupIdEdit->setPlaceholderText(tr("Group ID"));
+    connect(ui->openButton, &QPushButton::clicked, this, &MainWindow::openCamera);
+    connect(ui->captureButton, &QPushButton::clicked, this, &MainWindow::captureFace);
+    connect(ui->addGroupButton, &QPushButton::clicked, this, &MainWindow::addGroup);
+}
 
-    openButton = new QPushButton(tr("Open Camera"), this);
-    captureButton = new QPushButton(tr("Capture Face"), this);
-    addGroupButton = new QPushButton(tr("Add Group"), this);
-    statusLabel = new QLabel(this);
-
-    QVBoxLayout *layout = new QVBoxLayout(central);
-    layout->addWidget(viewFinder);
-    layout->addWidget(openButton);
-    layout->addWidget(userIdEdit);
-    layout->addWidget(groupIdEdit);
-    layout->addWidget(captureButton);
-    layout->addWidget(addGroupButton);
-    layout->addWidget(statusLabel);
-
-    connect(openButton, &QPushButton::clicked, this, &MainWindow::openCamera);
-    connect(captureButton, &QPushButton::clicked, this, &MainWindow::captureFace);
-    connect(addGroupButton, &QPushButton::clicked, this, &MainWindow::addGroup);
+MainWindow::~MainWindow()
+{
+    if (camera)
+        camera->stop();
+    delete camera;
+    delete ui;
 }
 
 void MainWindow::openCamera()
 {
     if (!camera) {
         camera = new QCamera(this);
-        camera->setViewfinder(viewFinder);
+        camera->setViewfinder(ui->viewFinder);
     }
     camera->start();
-    statusLabel->setText(tr("Camera opened"));
+    ui->statusLabel->setText(tr("Camera opened"));
 }
 
 void MainWindow::captureFace()
@@ -50,15 +37,15 @@ void MainWindow::captureFace()
         QMessageBox::warning(this, tr("Error"), tr("Please open camera"));
         return;
     }
-    if (userIdEdit->text().isEmpty()) {
+    if (ui->userIdEdit->text().isEmpty()) {
         QMessageBox::warning(this, tr("Error"), tr("User ID required"));
         return;
     }
-    if (groupIdEdit->text().isEmpty()) {
+    if (ui->groupIdEdit->text().isEmpty()) {
         QMessageBox::warning(this, tr("Error"), tr("Group ID required"));
         return;
     }
-    statusLabel->setText(tr("Face captured (mock)"));
+    ui->statusLabel->setText(tr("Face captured (mock)"));
 }
 
 void MainWindow::addGroup()
