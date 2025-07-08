@@ -6,52 +6,95 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string>Face Capture</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string>background:white;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QCameraViewfinder" name="viewFinder"/>
+     <widget class="QCameraViewfinder" name="viewFinder">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string>border:1px solid #ccc;</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="openButton">
+     <layout class="QGridLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="userLabel">
+        <property name="text">
+         <string>User ID:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="userIdEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="groupLabel">
+        <property name="text">
+         <string>Group ID:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="groupIdEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <item>
+       <widget class="QPushButton" name="openButton">
+        <property name="text">
+         <string>Open Camera</string>
+        </property>
+        <property name="styleSheet">
+         <string>background-color:#007AFF;color:white;padding:8px 16px;border-radius:4px;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="captureButton">
+        <property name="text">
+         <string>Capture Face</string>
+        </property>
+        <property name="styleSheet">
+         <string>background-color:#007AFF;color:white;padding:8px 16px;border-radius:4px;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addGroupButton">
+        <property name="text">
+         <string>Add Group</string>
+        </property>
+        <property name="styleSheet">
+         <string>background-color:#007AFF;color:white;padding:8px 16px;border-radius:4px;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="statusLabel">
       <property name="text">
-       <string>Open Camera</string>
+       <string></string>
       </property>
      </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="userIdEdit">
-      <property name="placeholderText">
-       <string>User ID</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="groupIdEdit">
-      <property name="placeholderText">
-       <string>Group ID</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="captureButton">
-      <property name="text">
-       <string>Capture Face</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="addGroupButton">
-      <property name="text">
-       <string>Add Group</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="statusLabel"/>
     </item>
    </layout>
   </widget>

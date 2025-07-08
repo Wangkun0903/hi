@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>200</width>
-    <height>100</height>
+    <width>300</width>
+    <height>150</height>
    </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Add Group</string>
+  </property>
+  <property name="styleSheet">
+   <string>background:white;</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -22,6 +28,9 @@
     <widget class="QPushButton" name="okButton">
      <property name="text">
       <string>OK</string>
+     </property>
+     <property name="styleSheet">
+      <string>background-color:#007AFF;color:white;padding:6px 12px;border-radius:4px;</string>
      </property>
     </widget>
    </item>
