@@ -1,4 +1,4 @@
-QT += widgets
+QT += widgets multimedia multimediawidgets
 CONFIG += c++14
 
 SOURCES += \
