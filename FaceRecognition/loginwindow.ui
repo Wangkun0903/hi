@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QDialog" name="LoginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Login</string>
+  </property>
+  <property name="styleSheet">
+   <string>background-color:white;</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <item>
+    <widget class="QCameraViewfinder" name="viewFinder">
+     <property name="minimumSize">
+      <size>
+       <width>320</width>
+       <height>240</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string>border:1px solid #ccc;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <widget class="QPushButton" name="openButton">
+       <property name="text">
+        <string>Open Camera</string>
+       </property>
+       <property name="styleSheet">
+        <string>background-color:#007AFF;color:white;padding:8px 16px;border-radius:4px;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="startButton">
+       <property name="text">
+        <string>Start Recognition</string>
+       </property>
+       <property name="styleSheet">
+        <string>background-color:#007AFF;color:white;padding:8px 16px;border-radius:4px;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
